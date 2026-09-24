@@ -242,7 +242,7 @@ function renderQuestionHint(question) {
                 <span>${loading ? '⏳' : '✨'}</span> ${loading ? 'AI đang suy nghĩ...' : (cachedHint ? 'Xem lại gợi ý' : 'Hỏi AI')}
             </button>
             <div class="ai-hint-card ${cachedHint ? 'show' : ''}" id="ai-hint-card">
-                <div class="ai-hint-heading"><span>🤖</span><strong>Gợi ý từ EduBot</strong></div>
+                <div class="ai-hint-heading"><span>🤖</span><strong>Gợi ý từ TestBot</strong></div>
                 <div class="ai-hint-content" id="ai-hint-content">${cachedHint ? autoWrapMath(escapeAttribute(cachedHint)) : ''}</div>
                 <div class="ai-hint-warning">Gợi ý chỉ mở hướng suy nghĩ, không đưa đáp án cuối cùng.</div>
             </div>
@@ -441,7 +441,7 @@ function showInstantAiFeedback(isCorrect, correctOption, customMessage = '') {
         `Mình cần xem lại chỗ này một chút. Đáp án đúng là ${correctOption}.`
     ];
     const messages = isCorrect ? correctMessages : wrongMessages;
-    title.textContent = isCorrect ? 'EduBot khen bạn!' : 'EduBot nhắc nhỏ';
+    title.textContent = isCorrect ? 'TestBot khen bạn!' : 'TestBot nhắc nhỏ';
     message.textContent = customMessage || messages[Math.floor(Math.random() * messages.length)];
     feedback.classList.remove('correct', 'wrong', 'show');
     void feedback.offsetWidth;

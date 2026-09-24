@@ -10,7 +10,7 @@ require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const JWT_SECRET = process.env.JWT_SECRET || 'eduflow_secret';
+const JWT_SECRET = process.env.JWT_SECRET || 'testmaster_secret';
 let geminiApiKey = process.env.GEMINI_API_KEY || '';
 let geminiApiKeySource = geminiApiKey ? 'environment' : 'none';
 let geminiSettingsLoaded = false;
@@ -144,7 +144,7 @@ app.post('/api/register', async (req, res) => {
             hashedPassword = await bcrypt.hash(password, salt);
         }
 
-        const isAdmin = admin_code && admin_code === (process.env.ADMIN_SECRET || 'EDUFLOW_ADMIN_2026');
+        const isAdmin = admin_code && admin_code === (process.env.ADMIN_SECRET || 'TESTMASTER_ADMIN_2026');
 
         const newUser = await db.query(
             'INSERT INTO users (username, email, password_hash, full_name, avatar_url, is_admin, survey_data) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id, username, email, is_admin',

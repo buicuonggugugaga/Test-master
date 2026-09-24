@@ -1,8 +1,8 @@
-# EduFlow
+# Testmaster
 
 Nền tảng ôn tập và thi trắc nghiệm trực tuyến dành cho học sinh THPT, tích hợp Google Gemini để hỗ trợ hỏi đáp, phân tích kết quả, tạo đề và xây dựng lộ trình học tập cá nhân hóa.
 
-![EduFlow](public/hero.png)
+![Testmaster](public/hero.png)
 
 ## Tính năng
 
@@ -16,7 +16,7 @@ Nền tảng ôn tập và thi trắc nghiệm trực tuyến dành cho học si
 - Xem bảng xếp hạng người dùng.
 - Dark mode trên toàn bộ giao diện, tự lưu lựa chọn.
 
-### StudyFlow Chatbot
+### TestBot Chatbot
 
 - Chatbot học tập dùng chung cho mọi môn học.
 - Lưu 10 lượt hỏi đáp gần nhất theo tài khoản trên trình duyệt.
@@ -81,7 +81,7 @@ DB_USER=postgres
 DB_PASSWORD=your_password
 DB_HOST=localhost
 DB_PORT=5432
-DB_NAME=eduflow
+DB_NAME=testmaster
 ```
 
 Không commit file `.env` hoặc Gemini API key lên Git.
@@ -143,7 +143,7 @@ API không trả key đầy đủ về trình duyệt. Chỉ Admin đã xác th�
 ├── public/
 │   ├── admin.html         # Trang quản trị
 │   ├── auth.html          # Đăng nhập và đăng ký
-│   ├── chatbot.html       # Trang StudyFlow Chatbot
+│   ├── chatbot.html       # Trang TestBot Chatbot
 │   ├── index.html         # Trang chủ
 │   ├── leaderboard.html   # Bảng xếp hạng
 │   ├── practice.html      # Chọn bài luyện tập

@@ -373,7 +373,7 @@ function initFloatingChatbot() {
             <div style="display: flex; align-items: center; gap: 8px;">
                 <span style="font-size: 1.2rem;">🤖</span>
                 <div>
-                    <h4 style="margin: 0; font-size: 0.95rem; font-weight: 700;">StudyFlow</h4>
+                    <h4 style="margin: 0; font-size: 0.95rem; font-weight: 700;">TestBot</h4>
                     <span style="font-size: 0.72rem; color: #10B981; font-weight: 600;">● Đang hoạt động</span>
                 </div>
             </div>
@@ -610,7 +610,7 @@ function initFloatingChatbot() {
             }
         });
     } else {
-        appendPanelBotMessage('Chào bạn! Mình là StudyFlow. Bạn có thể hỏi mình về bất kỳ môn học nào.');
+        appendPanelBotMessage('Chào bạn! Mình là TestBot. Bạn có thể hỏi mình về bất kỳ môn học nào.');
     }
 
     // Send logic

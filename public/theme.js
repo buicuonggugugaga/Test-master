@@ -1,6 +1,6 @@
 (function () {
-    const STORAGE_KEY = 'eduFlowTheme';
-    const POSITION_KEY = 'eduFlowThemeTogglePosition';
+    const STORAGE_KEY = 'testmasterTheme';
+    const POSITION_KEY = 'testmasterThemeTogglePosition';
     const root = document.documentElement;
 
     function getInitialTheme() {

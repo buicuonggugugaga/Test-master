@@ -1,7 +1,7 @@
 {
   "name": "quiz3",
   "version": "1.0.0",
-  "description": "Edu-Flow - Nền tảng ôn thi hàng đầu Việt Nam",
+  "description": "Testmaster - Nền tảng ôn thi hàng đầu Việt Nam",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
