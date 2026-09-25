@@ -317,11 +317,10 @@ function initFloatingChatbot() {
     const container = document.createElement('div');
     container.id = 'floating-chat-container';
     container.style.position = 'fixed';
-    container.style.bottom = '30px';
-    container.style.right = '30px';
+    container.style.bottom = '20px';
+    container.style.right = '20px';
     container.style.zIndex = '9999';
     container.style.fontFamily = "'Outfit', sans-serif";
-    container.style.touchAction = 'none';
 
     // Build the Floating Bubble Button
     const bubble = document.createElement('div');
@@ -438,26 +437,15 @@ function initFloatingChatbot() {
     container.appendChild(panel);
     document.body.appendChild(container);
 
-    let dragStartX = 0;
-    let dragStartY = 0;
-    let dragOffsetX = 0;
-    let dragOffsetY = 0;
-    let isDraggingChat = false;
-    let didMoveChat = false;
     const mobileChatQuery = window.matchMedia('(max-width: 768px)');
 
+    // The bubble stays pinned to the bottom-right corner on every page.
     const resetMobileChatPosition = () => {
-        if (!mobileChatQuery.matches) return;
-        isDraggingChat = false;
-        didMoveChat = false;
+        const offset = mobileChatQuery.matches ? '14px' : '20px';
         container.style.left = 'auto';
         container.style.top = 'auto';
-        container.style.right = '14px';
-        container.style.bottom = '14px';
-        container.style.width = '60px';
-        container.style.height = '60px';
-        container.style.touchAction = 'auto';
-        bubble.style.transform = 'none';
+        container.style.right = offset;
+        container.style.bottom = offset;
     };
 
     const closeChatPanel = () => {
@@ -468,68 +456,9 @@ function initFloatingChatbot() {
         resetMobileChatPosition();
     };
 
-    const clampChatPosition = (left, top) => {
-        const rect = container.getBoundingClientRect();
-        const margin = 10;
-        const maxLeft = window.innerWidth - rect.width - margin;
-        const maxTop = window.innerHeight - rect.height - margin;
-        return {
-            left: Math.min(Math.max(margin, left), Math.max(margin, maxLeft)),
-            top: Math.min(Math.max(margin, top), Math.max(margin, maxTop))
-        };
-    };
-
-    bubble.addEventListener('pointerdown', (e) => {
-        if (mobileChatQuery.matches) return;
-        if (panel.style.display !== 'none') return;
-        isDraggingChat = true;
-        didMoveChat = false;
-        const rect = container.getBoundingClientRect();
-        dragStartX = e.clientX;
-        dragStartY = e.clientY;
-        dragOffsetX = e.clientX - rect.left;
-        dragOffsetY = e.clientY - rect.top;
-        bubble.setPointerCapture(e.pointerId);
-        bubble.style.transition = 'none';
-        container.style.right = 'auto';
-        container.style.bottom = 'auto';
-        container.style.left = `${rect.left}px`;
-        container.style.top = `${rect.top}px`;
-    });
-
-    bubble.addEventListener('pointermove', (e) => {
-        if (mobileChatQuery.matches) return;
-        if (!isDraggingChat) return;
-        const moved = Math.abs(e.clientX - dragStartX) + Math.abs(e.clientY - dragStartY);
-        if (moved > 6) didMoveChat = true;
-        if (!didMoveChat) return;
-        const pos = clampChatPosition(e.clientX - dragOffsetX, e.clientY - dragOffsetY);
-        container.style.left = `${pos.left}px`;
-        container.style.top = `${pos.top}px`;
-    });
-
-    bubble.addEventListener('pointerup', (e) => {
-        if (mobileChatQuery.matches) return;
-        if (!isDraggingChat) return;
-        isDraggingChat = false;
-        bubble.releasePointerCapture(e.pointerId);
-        bubble.style.transition = 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-        if (didMoveChat) {
-            e.preventDefault();
-            e.stopPropagation();
-            setTimeout(() => { didMoveChat = false; }, 0);
-        }
-    });
-
-    bubble.addEventListener('pointercancel', () => {
-        isDraggingChat = false;
-        didMoveChat = false;
-        resetMobileChatPosition();
-    });
-
     const handleChatViewportChange = () => {
+        resetMobileChatPosition();
         if (mobileChatQuery.matches) {
-            resetMobileChatPosition();
             if (panel.style.display !== 'none') {
                 document.body.classList.add('mobile-chat-open');
             }
@@ -538,14 +467,7 @@ function initFloatingChatbot() {
         document.body.classList.remove('mobile-chat-open');
         if (panel.style.display !== 'none') {
             positionChatPanel();
-            return;
         }
-        const rect = container.getBoundingClientRect();
-        const pos = clampChatPosition(rect.left, rect.top);
-        container.style.right = 'auto';
-        container.style.bottom = 'auto';
-        container.style.left = `${pos.left}px`;
-        container.style.top = `${pos.top}px`;
     };
 
     window.addEventListener('resize', handleChatViewportChange);
@@ -575,11 +497,7 @@ function initFloatingChatbot() {
     };
 
     // Toggle Chat
-    bubble.onclick = (e) => {
-        if (didMoveChat) {
-            e.preventDefault();
-            return;
-        }
+    bubble.onclick = () => {
         if (panel.style.display === 'none') {
             resetMobileChatPosition();
             positionChatPanel();
